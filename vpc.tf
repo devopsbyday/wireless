@@ -39,18 +39,3 @@ resource "aws_elasticache_subnet_group" "ec_redis_subnet_group" {
     Name = "ec_redis_subnet_group"
   }
 }
-
-resource "aws_elasticache_cluster" "ec_redis_cluster" {
-  cluster_id           = "ec-redis-cluster"
-  engine               = "redis"
-  node_type            = "cache.m4.large"
-  num_cache_nodes      = 2
-  parameter_group_name = "default.redis3.2"
-  port                 = 6379
-  subnet_group_name    = aws_elasticache_subnet_group.ec_redis_subnet_group.name
-  security_group_ids   = [aws_security_group.elasticache_sg.id]
-
-  tags = {
-    Name = "ec_redis_cluster"
-  }
-}
